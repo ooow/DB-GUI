@@ -19,7 +19,12 @@ public class MainMenu extends JFrame {
     private void initComponents(String[] items) {
         comboBox1 = new JComboBox(items);
         scrollPane1 = new JScrollPane();
-        table1 = new JTable();
+        try {
+            String[] columName = Main.getColumn(items[0]);
+            table1 = new JTable(Main.getData(items[0], columName.length), columName);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         //======== this ========
         setMinimumSize(new Dimension(800, 500));

@@ -62,7 +62,7 @@ public class Main {
             temp.add(temp2);
         }
         String[][] data = new String[temp.size()][columnCount];
-        for (int i = 0; i < columnCount; i++) {
+        for (int i = 0; i < temp.size(); i++) {
             data[i] = temp.get(i).toArray(new String[columnCount]);
         }
         return data;

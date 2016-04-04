@@ -30,30 +30,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.48">
-              <caret line="57" column="25" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="64" column="39" selection-start-line="64" selection-start-column="39" selection-end-line="64" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1459774154909" expanded="true" signature="371:411" placeholder="INSERT into ORG... " />
-                <marker date="1459774154909" expanded="true" signature="1753:1842" placeholder="SELECT COLUM... COLUMNS" />
-                <marker date="1459774154909" expanded="true" signature="2017:2044" placeholder="SELECT * FRO... missingValue" />
+                <marker date="1459774889353" expanded="true" signature="371:411" placeholder="INSERT into ORG... " />
+                <marker date="1459774889353" expanded="true" signature="1753:1842" placeholder="SELECT COLUM... COLUMNS" />
+                <marker date="1459774889353" expanded="true" signature="2017:2044" placeholder="SELECT * FRO... missingValue" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainMenu.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainMenu.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MainMenu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="36" column="56" selection-start-line="36" selection-start-column="56" selection-end-line="36" selection-end-column="56" />
+            <state vertical-scroll-proportion="0.37411764">
+              <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1459774216577" expanded="true" signature="409:2686" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-                <marker date="1459774216577" expanded="true" signature="2692:2790" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
+                <marker date="1459774636138" expanded="true" signature="409:2892" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
+                <marker date="1459774636138" expanded="true" signature="2898:2996" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
               </folding>
             </state>
           </provider>
@@ -82,8 +82,8 @@
         <option value="$PROJECT_DIR$/src/MainMenu.jfd" />
         <option value="$PROJECT_DIR$/src/Actions.java" />
         <option value="$PROJECT_DIR$/src/dbGUI.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/MainMenu.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
       </list>
     </option>
   </component>
@@ -663,12 +663,12 @@
       <workItem from="1459541599111" duration="49000" />
       <workItem from="1459711618674" duration="5572000" />
       <workItem from="1459764282440" duration="498000" />
-      <workItem from="1459767259959" duration="6770000" />
+      <workItem from="1459767259959" duration="7360000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24972000" />
+    <option name="totallyTimeSpent" value="25562000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="7" />
@@ -714,7 +714,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="14" />
+      <option name="time" value="18" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -729,9 +729,9 @@
           <caret line="35" column="29" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1459774154909" expanded="true" signature="371:411" placeholder="INSERT into ORG... " />
-            <marker date="1459774154909" expanded="true" signature="1753:1842" placeholder="SELECT COLUM... COLUMNS" />
-            <marker date="1459774154909" expanded="true" signature="2017:2044" placeholder="SELECT * FRO... missingValue" />
+            <marker date="1459774889353" expanded="true" signature="371:411" placeholder="INSERT into ORG... " />
+            <marker date="1459774889353" expanded="true" signature="1753:1842" placeholder="SELECT COLUM... COLUMNS" />
+            <marker date="1459774889353" expanded="true" signature="2017:2044" placeholder="SELECT * FRO... missingValue" />
           </folding>
         </state>
       </provider>
@@ -764,8 +764,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1459774216577" expanded="true" signature="409:2686" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-            <marker date="1459774216577" expanded="true" signature="2692:2790" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
+            <marker date="1459774636138" expanded="true" signature="409:2892" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
+            <marker date="1459774636138" expanded="true" signature="2898:2996" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
           </folding>
         </state>
       </provider>
@@ -776,9 +776,9 @@
           <caret line="35" column="29" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1459774154909" expanded="true" signature="371:411" placeholder="INSERT into ORG... " />
-            <marker date="1459774154909" expanded="true" signature="1753:1842" placeholder="SELECT COLUM... COLUMNS" />
-            <marker date="1459774154909" expanded="true" signature="2017:2044" placeholder="SELECT * FRO... missingValue" />
+            <marker date="1459774889353" expanded="true" signature="371:411" placeholder="INSERT into ORG... " />
+            <marker date="1459774889353" expanded="true" signature="1753:1842" placeholder="SELECT COLUM... COLUMNS" />
+            <marker date="1459774889353" expanded="true" signature="2017:2044" placeholder="SELECT * FRO... missingValue" />
           </folding>
         </state>
       </provider>
@@ -811,8 +811,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1459774216577" expanded="true" signature="409:2686" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-            <marker date="1459774216577" expanded="true" signature="2692:2790" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
+            <marker date="1459774636138" expanded="true" signature="409:2892" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
+            <marker date="1459774636138" expanded="true" signature="2898:2996" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
           </folding>
         </state>
       </provider>
@@ -823,9 +823,9 @@
           <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1459774154909" expanded="true" signature="371:411" placeholder="INSERT into ORG... " />
-            <marker date="1459774154909" expanded="true" signature="1753:1842" placeholder="SELECT COLUM... COLUMNS" />
-            <marker date="1459774154909" expanded="true" signature="2017:2044" placeholder="SELECT * FRO... missingValue" />
+            <marker date="1459774889353" expanded="true" signature="371:411" placeholder="INSERT into ORG... " />
+            <marker date="1459774889353" expanded="true" signature="1753:1842" placeholder="SELECT COLUM... COLUMNS" />
+            <marker date="1459774889353" expanded="true" signature="2017:2044" placeholder="SELECT * FRO... missingValue" />
           </folding>
         </state>
       </provider>
@@ -853,9 +853,9 @@
           <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1459774154909" expanded="true" signature="371:411" placeholder="INSERT into ORG... " />
-            <marker date="1459774154909" expanded="true" signature="1753:1842" placeholder="SELECT COLUM... COLUMNS" />
-            <marker date="1459774154909" expanded="true" signature="2017:2044" placeholder="SELECT * FRO... missingValue" />
+            <marker date="1459774889353" expanded="true" signature="371:411" placeholder="INSERT into ORG... " />
+            <marker date="1459774889353" expanded="true" signature="1753:1842" placeholder="SELECT COLUM... COLUMNS" />
+            <marker date="1459774889353" expanded="true" signature="2017:2044" placeholder="SELECT * FRO... missingValue" />
           </folding>
         </state>
       </provider>
@@ -883,9 +883,9 @@
           <caret line="23" column="73" selection-start-line="23" selection-start-column="73" selection-end-line="23" selection-end-column="73" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1459774154909" expanded="true" signature="371:411" placeholder="INSERT into ORG... " />
-            <marker date="1459774154909" expanded="true" signature="1753:1842" placeholder="SELECT COLUM... COLUMNS" />
-            <marker date="1459774154909" expanded="true" signature="2017:2044" placeholder="SELECT * FRO... missingValue" />
+            <marker date="1459774889353" expanded="true" signature="371:411" placeholder="INSERT into ORG... " />
+            <marker date="1459774889353" expanded="true" signature="1753:1842" placeholder="SELECT COLUM... COLUMNS" />
+            <marker date="1459774889353" expanded="true" signature="2017:2044" placeholder="SELECT * FRO... missingValue" />
           </folding>
         </state>
       </provider>
@@ -913,9 +913,9 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1459774154909" expanded="true" signature="371:411" placeholder="INSERT into ORG... " />
-            <marker date="1459774154909" expanded="true" signature="1753:1842" placeholder="SELECT COLUM... COLUMNS" />
-            <marker date="1459774154909" expanded="true" signature="2017:2044" placeholder="SELECT * FRO... missingValue" />
+            <marker date="1459774889353" expanded="true" signature="371:411" placeholder="INSERT into ORG... " />
+            <marker date="1459774889353" expanded="true" signature="1753:1842" placeholder="SELECT COLUM... COLUMNS" />
+            <marker date="1459774889353" expanded="true" signature="2017:2044" placeholder="SELECT * FRO... missingValue" />
           </folding>
         </state>
       </provider>
@@ -926,9 +926,9 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1459774154909" expanded="true" signature="371:411" placeholder="INSERT into ORG... " />
-            <marker date="1459774154909" expanded="true" signature="1753:1842" placeholder="SELECT COLUM... COLUMNS" />
-            <marker date="1459774154909" expanded="true" signature="2017:2044" placeholder="SELECT * FRO... missingValue" />
+            <marker date="1459774889353" expanded="true" signature="371:411" placeholder="INSERT into ORG... " />
+            <marker date="1459774889353" expanded="true" signature="1753:1842" placeholder="SELECT COLUM... COLUMNS" />
+            <marker date="1459774889353" expanded="true" signature="2017:2044" placeholder="SELECT * FRO... missingValue" />
           </folding>
         </state>
       </provider>
@@ -939,9 +939,9 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1459774154909" expanded="true" signature="371:411" placeholder="INSERT into ORG... " />
-            <marker date="1459774154909" expanded="true" signature="1753:1842" placeholder="SELECT COLUM... COLUMNS" />
-            <marker date="1459774154909" expanded="true" signature="2017:2044" placeholder="SELECT * FRO... missingValue" />
+            <marker date="1459774889353" expanded="true" signature="371:411" placeholder="INSERT into ORG... " />
+            <marker date="1459774889353" expanded="true" signature="1753:1842" placeholder="SELECT COLUM... COLUMNS" />
+            <marker date="1459774889353" expanded="true" signature="2017:2044" placeholder="SELECT * FRO... missingValue" />
           </folding>
         </state>
       </provider>
@@ -972,11 +972,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/poping/MainMenu.jfd">
-      <provider selected="true" editor-type-id="JFormDesigner">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/dbGUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -997,43 +992,51 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/poping/MainMenu.jfd">
+      <provider selected="true" editor-type-id="JFormDesigner">
+        <state />
+      </provider>
+    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/sqljdbc4.jar!/com/microsoft/sqlserver/jdbc/SQLServerStatement.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.259259">
-          <caret line="395" column="0" selection-start-line="395" selection-start-column="0" selection-end-line="395" selection-end-column="0" />
+        <state vertical-scroll-proportion="-4.6296296">
+          <caret line="251" column="0" selection-start-line="251" selection-start-column="0" selection-end-line="251" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/lib/sqljdbc4.jar!/com/microsoft/sqlserver/jdbc/SQLServerResultSet.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35714287">
+        <state vertical-scroll-proportion="-4.296296">
           <caret line="1505" column="0" selection-start-line="1505" selection-start-column="0" selection-end-line="1505" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MainMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="56" selection-start-line="36" selection-start-column="56" selection-end-line="36" selection-end-column="56" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1459774216577" expanded="true" signature="409:2686" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-            <marker date="1459774216577" expanded="true" signature="2692:2790" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
+            <element signature="e#4382#4383#0" expanded="true" />
+            <element signature="e#4426#4427#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48">
-          <caret line="57" column="25" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="64" column="39" selection-start-line="64" selection-start-column="39" selection-end-line="64" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1459774154909" expanded="true" signature="371:411" placeholder="INSERT into ORG... " />
-            <marker date="1459774154909" expanded="true" signature="1753:1842" placeholder="SELECT COLUM... COLUMNS" />
-            <marker date="1459774154909" expanded="true" signature="2017:2044" placeholder="SELECT * FRO... missingValue" />
+            <marker date="1459774889353" expanded="true" signature="371:411" placeholder="INSERT into ORG... " />
+            <marker date="1459774889353" expanded="true" signature="1753:1842" placeholder="SELECT COLUM... COLUMNS" />
+            <marker date="1459774889353" expanded="true" signature="2017:2044" placeholder="SELECT * FRO... missingValue" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MainMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37411764">
+          <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1459774636138" expanded="true" signature="409:2892" placeholder="// JFormDesigner - Component initialization - DO NOT MODIFY" />
+            <marker date="1459774636138" expanded="true" signature="2898:2996" placeholder="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
           </folding>
         </state>
       </provider>
