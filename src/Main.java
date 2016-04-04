@@ -46,8 +46,25 @@ public class Main {
         return temp.toArray(new String[temp.size()]);
     }
 
-    public String[] getColumn(String tableName) throws SQLException {
+    public static String[] getColumn(String tableName) throws SQLException {
         rs = st1.executeQuery("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '" + tableName + "'");
         return setToArray(rs);
+    }
+
+    public static String[][] getData(String tableName, int columnCount) throws SQLException {
+        rs = st1.executeQuery("use GYM SELECT * FROM " + tableName);
+        List<List<String>> temp = new ArrayList<>();
+        while (rs.next()) {
+            List<String> temp2 = new ArrayList<>();
+            for (int i = 1; i <= columnCount; i++) {
+                temp2.add(rs.getString(i));
+            }
+            temp.add(temp2);
+        }
+        String[][] data = new String[temp.size()][columnCount];
+        for (int i = 0; i < columnCount; i++) {
+            data[i] = temp.get(i).toArray(new String[columnCount]);
+        }
+        return data;
     }
 }

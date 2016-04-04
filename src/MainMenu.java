@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import javax.swing.*;
 /*
  * Created by JFormDesigner on Sun Apr 03 22:34:34 MSK 2016
@@ -36,8 +37,16 @@ public class MainMenu extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String item = getItem(e.getSource());
                 for (int i = 0; i < items.length; i++) {
-                    if (item.equals(items[i]))
-                        System.out.println(items[i]);
+                    if (item.equals(items[i])) {
+                        try {
+                            String[] columName = Main.getColumn(items[i]);
+                            table1 = new JTable(Main.getData(items[i], columName.length), columName);
+                            scrollPane1.setViewportView(table1);
+                        } catch (SQLException e1) {
+                            e1.printStackTrace();
+                        }
+                        break;
+                    }
                 }
             }
         });
