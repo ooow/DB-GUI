@@ -5,6 +5,7 @@
 package poping;
 
 import java.awt.*;
+import java.beans.*;
 import javax.swing.*;
 
 /**
@@ -13,6 +14,10 @@ import javax.swing.*;
 public class MainMenu extends JFrame {
     public MainMenu() {
         initComponents();
+    }
+
+    private void scrollPane1PropertyChange(PropertyChangeEvent e) {
+        // TODO add your code here
     }
 
     private void initComponents() {
@@ -24,6 +29,7 @@ public class MainMenu extends JFrame {
         button1 = new JButton();
         button2 = new JButton();
         button3 = new JButton();
+        label1 = new JLabel();
 
         //======== this ========
         setMinimumSize(new Dimension(800, 500));
@@ -39,10 +45,14 @@ public class MainMenu extends JFrame {
 
         //======== scrollPane1 ========
         {
+            scrollPane1.addPropertyChangeListener(e -> scrollPane1PropertyChange(e));
+
+            //---- table1 ----
+            table1.setCellSelectionEnabled(true);
             scrollPane1.setViewportView(table1);
         }
         contentPane.add(scrollPane1);
-        scrollPane1.setBounds(205, 15, 450, 255);
+        scrollPane1.setBounds(200, 15, 450, 255);
 
         //---- button1 ----
         button1.setText("text");
@@ -58,6 +68,11 @@ public class MainMenu extends JFrame {
         button3.setText("text");
         contentPane.add(button3);
         button3.setBounds(490, 445, 145, 32);
+
+        //---- label1 ----
+        label1.setText("text");
+        contentPane.add(label1);
+        label1.setBounds(205, 295, 450, 25);
 
         { // compute preferred size
             Dimension preferredSize = new Dimension();
@@ -85,5 +100,6 @@ public class MainMenu extends JFrame {
     private JButton button1;
     private JButton button2;
     private JButton button3;
+    private JLabel label1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

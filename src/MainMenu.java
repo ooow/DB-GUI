@@ -1,10 +1,11 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 /*
  * Created by JFormDesigner on Sun Apr 03 22:34:34 MSK 2016
@@ -15,16 +16,17 @@ import javax.swing.table.DefaultTableModel;
  * @author Goga Tirkiya
  */
 public class MainMenu extends JFrame {
-    private JComboBox comboBox1;
-    private JScrollPane scrollPane1;
-    private JTable table1;
     private JButton deleteButton;
     private JButton updateButton;
     private JButton createButton;
+    private JComboBox comboBox1;
+    private JScrollPane scrollPane1;
+    private JTable table1;
+    private JLabel infoLabel;
     private DefaultTableModel dt;
     private String[] selected;
-    private int row, column;
     private String forUpdate;
+    private int row, column;
 
     public MainMenu(String[] items) {
         initComponents(items);
@@ -33,9 +35,11 @@ public class MainMenu extends JFrame {
     private void initComponents(String[] items) {
         comboBox1 = new JComboBox(items);
         scrollPane1 = new JScrollPane();
+        infoLabel = new JLabel();
         try {
             String[] columName = Main.getColumn(items[0]);
             dt = new DefaultTableModel(Main.getData(items[0], columName.length), columName);
+            dt.addRow(new String[items.length]);
             table1 = new JTable();
             table1.setModel(dt);
         } catch (SQLException e) {
@@ -49,28 +53,16 @@ public class MainMenu extends JFrame {
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
+        //---- label1 ----
+        infoLabel.setText("");
+        contentPane.add(infoLabel);
+        infoLabel.setBounds(205, 295, 450, 25);
+
         //---- table1 ---
         table1.setCellSelectionEnabled(true);
         ListSelectionModel cellSelectionModel = table1.getSelectionModel();
         cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent e) {
-                try {
-                    row = table1.getSelectedRow();
-                    column = table1.getSelectedColumn();
-                    forUpdate = (String) table1.getValueAt(row, column);
-                    int count = table1.getColumnCount();
-                    selected = new String[count];
-                    for (int i = 0; i < count; i++) {
-                        if (i != column)
-                            selected[i] = (String) table1.getValueAt(row, i);
-                    }
-                } catch (ArrayIndexOutOfBoundsException e1) {
-                    selected = null;
-                }
-                System.out.println("Selected: " + selected + ":" + row + " - " + column);
-            }
-        });
+        cellSelectionModel.addListSelectionListener(valueChanged());
 
         //---- deleteButton ---
         deleteButton = new JButton();
@@ -100,25 +92,7 @@ public class MainMenu extends JFrame {
         comboBox1.setSelectedIndex(0);
         contentPane.add(comboBox1);
         comboBox1.setBounds(15, 35, 135, 35);
-        comboBox1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String item = getItem(e.getSource());
-                for (int i = 0; i < items.length; i++) {
-                    if (item.equals(items[i])) {
-                        try {
-                            String[] columName = Main.getColumn(items[i]);
-                            dt = new DefaultTableModel(Main.getData(items[i], columName.length), columName);
-                            table1.setModel(dt);
-                            scrollPane1.setViewportView(table1);
-                        } catch (SQLException e1) {
-                            e1.printStackTrace();
-                        }
-                        break;
-                    }
-                }
-            }
-        });
+        comboBox1.addActionListener(e -> cbAction(e, items));
 
         //======== scrollPane1 ========
         {
@@ -151,26 +125,82 @@ public class MainMenu extends JFrame {
     }
 
     private void deleteButtonActionPerformed(ActionEvent e) {
+        String tableName = (String) comboBox1.getSelectedItem();
+        String[] itemsName = new String[table1.getColumnCount()];
+        for (int i = 0; i < itemsName.length; i++) {
+            itemsName[i] = table1.getColumnName(i);
+        }
+        try {
+            Main.delete(tableName, itemsName, selected);
+            comboBox1.setSelectedItem(comboBox1.getSelectedItem());
+        } catch (SQLException e1) {
+            infoLabel.setText("Errore: Impossible remove, found dependency");
+        }
     }
 
     private void updateButtonActionPerformed(ActionEvent e) {
         String tableName = (String) comboBox1.getSelectedItem();
         String columName = table1.getColumnName(column);
         String[] itemsName = new String[table1.getColumnCount()];
+        infoLabel.setText("");
         for (int i = 0; i < itemsName.length; i++) {
             itemsName[i] = table1.getColumnName(i);
         }
         try {
-
-
             Main.update(tableName, columName, forUpdate, itemsName, selected);
-
-
         } catch (SQLException e1) {
             e1.printStackTrace();
         }
     }
 
     private void createButtonActionPerformed(ActionEvent e) {
+        String tableName = (String) comboBox1.getSelectedItem();
+        try {
+            Main.insert(tableName, selected);
+            comboBox1.setSelectedItem(comboBox1.getSelectedItem());
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    private void cbAction(ActionEvent e, String[] items) {
+        String item = getItem(e.getSource());
+        for (int i = 0; i < items.length; i++) {
+            if (item.equals(items[i])) {
+                try {
+                    String[] columName = Main.getColumn(items[i]);
+                    dt = new DefaultTableModel(Main.getData(items[i], columName.length), columName);
+                    dt.addRow(new String[items.length]);
+                    table1.setModel(dt);
+                    scrollPane1.setViewportView(table1);
+                    infoLabel.setText("");
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+                break;
+            }
+        }
+    }
+
+    public ListSelectionListener valueChanged() {
+        return new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                try {
+                    row = table1.getSelectedRow();
+                    column = table1.getSelectedColumn();
+                    forUpdate = (String) table1.getValueAt(row, column);
+                    int count = table1.getColumnCount();
+                    selected = new String[count];
+                    for (int i = 0; i < count; i++) {
+                        selected[i] = (String) table1.getValueAt(row, i);
+                    }
+                    infoLabel.setText("");
+                } catch (ArrayIndexOutOfBoundsException e1) {
+                    selected = null;
+                }
+                System.out.println("Selected: " + selected + ":" + row + " - " + column);
+            }
+        };
     }
 }

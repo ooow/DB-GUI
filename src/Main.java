@@ -64,11 +64,36 @@ public class Main {
     public static void update(String tableName, String columName, String update, String[] items, String[] colums) throws SQLException {
         String sql = "UPDATE " + tableName + " SET " + columName + " = " + "'" + update + "'" + " WHERE ";
         for (int i = 0; i < colums.length; i++) {
-            if (colums[i] != null) {
+            if (!items[i].equals(columName)) {
                 sql += items[i] + " = " + "'" + colums[i] + "'";
                 if (colums.length - i > 1)
                     sql += " and ";
             }
+        }
+        System.out.println(sql);
+        st1.executeUpdate(sql);
+    }
+
+    public static void delete(String tableName, String[] items, String[] colums) throws SQLException {
+        String sql = "DELETE FROM " + tableName + " WHERE ";
+        for (int i = 0; i < colums.length; i++) {
+            sql += items[i] + " = " + "'" + colums[i] + "'";
+            if (colums.length - i > 1)
+                sql += " and ";
+
+        }
+        System.out.println(sql);
+        st1.executeUpdate(sql);
+    }
+
+    public static void insert(String tableName, String[] colums) throws SQLException {
+        String sql = "INSERT INTO " + tableName + " VALUES (";
+        for (int i = 0; i < colums.length; i++) {
+            sql += "'" + colums[i] + "'";
+            if (colums.length - i > 1)
+                sql += ", ";
+            else sql += ")";
+
         }
         System.out.println(sql);
         st1.executeUpdate(sql);

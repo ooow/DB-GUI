@@ -9,9 +9,6 @@ new FormModel {
 			"$locationPolicy": 1
 			"visible": true
 			"title": "СУБД GT"
-			auxiliary() {
-				"JavaCodeGenerator.variableModifiers": 1
-			}
 			add( new FormComponent( "javax.swing.JComboBox" ) {
 				name: "comboBox1"
 				"selectedIndex": 0
@@ -23,11 +20,13 @@ new FormModel {
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
+				addEvent( new FormEvent( "java.beans.PropertyChangeListener", "propertyChange", "scrollPane1PropertyChange", true ) )
 				add( new FormComponent( "javax.swing.JTable" ) {
 					name: "table1"
+					"cellSelectionEnabled": true
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 205
+				"x": 200
 				"y": 15
 				"width": 450
 				"height": 255
@@ -58,8 +57,17 @@ new FormModel {
 				"x": 490
 				"y": 445
 			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "text"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 205
+				"y": 295
+				"width": 450
+				"height": 25
+			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 0 )
+			"location": new java.awt.Point( 25, 0 )
 			"size": new java.awt.Dimension( 715, 550 )
 		} )
 	}
