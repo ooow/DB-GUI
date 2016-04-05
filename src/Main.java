@@ -17,13 +17,6 @@ public class Main {
             st.addBatch();
         }
         st.executeBatch();*/
-
-
-      /*  Statement st1 = con.createStatement();
-        ResultSet rs = st1.executeQuery("use GYM select * from Clients");
-        while (rs.next()) {
-            System.out.println(rs.getString(1) + "\t" + rs.getString(2) + "\t\t" + rs.getString(3) + "\t" + rs.getString(4));
-        }*/
     }
 
     public static void run(String log, String pass) throws SQLException {
@@ -66,5 +59,18 @@ public class Main {
             data[i] = temp.get(i).toArray(new String[columnCount]);
         }
         return data;
+    }
+
+    public static void update(String tableName, String columName, String update, String[] items, String[] colums) throws SQLException {
+        String sql = "UPDATE " + tableName + " SET " + columName + " = " + "'" + update + "'" + " WHERE ";
+        for (int i = 0; i < colums.length; i++) {
+            if (colums[i] != null) {
+                sql += items[i] + " = " + "'" + colums[i] + "'";
+                if (colums.length - i > 1)
+                    sql += " and ";
+            }
+        }
+        System.out.println(sql);
+        st1.executeUpdate(sql);
     }
 }

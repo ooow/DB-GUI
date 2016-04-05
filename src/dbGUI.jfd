@@ -10,6 +10,9 @@ new FormModel {
 			"name": "startFrame"
 			"$locationPolicy": 1
 			"visible": true
+			auxiliary() {
+				"JavaCodeGenerator.variableModifiers": 1
+			}
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "loginButton"
 				"text": "Singin"
@@ -73,7 +76,7 @@ new FormModel {
 				"width": 251
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 25, 20 )
+			"location": new java.awt.Point( 30, 20 )
 			"size": new java.awt.Dimension( 500, 395 )
 		} )
 	}

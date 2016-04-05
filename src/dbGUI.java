@@ -1,8 +1,3 @@
-import javax.swing.event.*;
-
-import com.sun.org.apache.xpath.internal.functions.FuncFalse;
-import javafx.util.Pair;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,31 +10,19 @@ import java.sql.SQLException;
  * @author unknown
  */
 public class dbGUI extends JFrame {
-    private boolean active = false;
+    private JButton loginButton;
+    private JPasswordField passwordField1;
+    private JFormattedTextField formattedTextField1;
+    private JLabel label1;
+    private JLabel label2;
+    private JLabel label3;
+    private JProgressBar progressBar1;
 
     public dbGUI() {
         initComponents();
     }
 
-    private void loginButtonActionPerformed(ActionEvent e) {
-        progressBar1.setStringPainted(true);
-        progressBar1.setMinimum(0);
-        progressBar1.setMaximum(100);
-        try {
-            progressBar1.setValue(100);
-            Main.run(getLogin(), getPass());
-        } catch (SQLException e1) {
-            label1.setText("Invalid login or password");
-        }
-    }
-
-    private void progressBar1StateChanged(ChangeEvent e) {
-        // TODO add your code here
-    }
-
     private void initComponents() {
-        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Goga Tirkiya
         loginButton = new JButton();
         passwordField1 = new JPasswordField();
         formattedTextField1 = new JFormattedTextField();
@@ -62,6 +45,8 @@ public class dbGUI extends JFrame {
         loginButton.addActionListener(e -> loginButtonActionPerformed(e));
         contentPane.add(loginButton);
         loginButton.setBounds(155, 205, 155, loginButton.getPreferredSize().height);
+
+
         contentPane.add(passwordField1);
         passwordField1.setBounds(155, 155, 160, 30);
         contentPane.add(formattedTextField1);
@@ -90,7 +75,7 @@ public class dbGUI extends JFrame {
 
         { // compute preferred size
             Dimension preferredSize = new Dimension();
-            for(int i = 0; i < contentPane.getComponentCount(); i++) {
+            for (int i = 0; i < contentPane.getComponentCount(); i++) {
                 Rectangle bounds = contentPane.getComponent(i).getBounds();
                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -103,19 +88,19 @@ public class dbGUI extends JFrame {
         }
         pack();
         setLocationRelativeTo(null);
-        // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Goga Tirkiya
-    private JButton loginButton;
-    private JPasswordField passwordField1;
-    private JFormattedTextField formattedTextField1;
-    private JLabel label1;
-    private JLabel label2;
-    private JLabel label3;
-    private JProgressBar progressBar1;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables
+    private void loginButtonActionPerformed(ActionEvent e) {
+        progressBar1.setStringPainted(true);
+        progressBar1.setMinimum(0);
+        progressBar1.setMaximum(100);
+        try {
+            progressBar1.setValue(100);
+            Main.run(getLogin(), getPass());
+        } catch (SQLException e1) {
+            label1.setText("Invalid login or password");
+        }
+    }
 
     public String getLogin() {
         return formattedTextField1.getText();
