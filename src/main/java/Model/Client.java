@@ -11,79 +11,106 @@ import java.util.Set;
 @Table
 public class Client extends Model {
     @Column
-    private String name;
+    private String Name;
     @Column
-    private String sex;
+    private String Sex;
     @Column
-    private String age;
+    private int Age;
     @ManyToOne
     @JoinColumn(name = "trainer_id")
-    private Trainer trainer;
-    @ManyToMany
-    @JoinTable(name = "client_section",
-            joinColumns = {@JoinColumn(name = "client_id")},
-            inverseJoinColumns = {@JoinColumn(name = "section_id")})
-    private Set<Section> sections = new HashSet<Section>();
+    private Trainer Trainer;
+    @ManyToOne
+    @JoinColumn(name = "section_id")
+    private Section Section;
 
     @ManyToOne
     @JoinColumn(name = "gym_id")
-    private Gym gym;
+    private Gym Gym;
 
     @OneToOne
-    @PrimaryKeyJoinColumn
-    private Subscription subscription;
+    @JoinColumn(name = "subscription_id")
+    private Subscription Subscription;
+
 
     public Client() {
         super();
     }
 
+    public Client(String name, int age, String sex, Gym gym) {
+        this.Name = name;
+        this.Age = age;
+        this.Sex = sex;
+        this.Gym = gym;
+    }
+
+    @Override
+    public String[] getDataToStringArr() {
+        String[] data = new String[8];
+        data[0] = String.valueOf(getId());
+        data[1] = Name;
+        data[2] = String.valueOf(Age);
+        data[3] = Sex;
+        data[4] = Section.getSportname();
+        data[5] = Trainer.getName();
+        data[6] = String.valueOf(Subscription.getId());
+        data[7] = Gym.getTitle();
+        return data;
+    }
+
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.Name = name;
     }
 
     public String getSex() {
-        return sex;
+        return Sex;
     }
 
     public void setSex(String sex) {
-        this.sex = sex;
+        this.Sex = sex;
     }
 
-    public String getAge() {
-        return age;
+    public int getAge() {
+        return Age;
     }
 
-    public void setAge(String age) {
-        this.age = age;
+    public void setAge(int age) {
+        this.Age = age;
     }
 
     public Trainer getTrainer() {
-        return trainer;
+        return Trainer;
     }
 
     public void setTrainer(Trainer trainer) {
-        this.trainer = trainer;
+        this.Trainer = trainer;
     }
 
+    public Section getSection() {
+        return Section;
+    }
 
-    public void setSections(Set<Section> sections) {
-        this.sections = sections;
+    public void setSection(Section section) {
+        this.Section = section;
     }
 
     public void setGym(Gym gym) {
-        this.gym = gym;
+        this.Gym = gym;
     }
-
-    public Set<Section> getSections() {
-        return sections;
-    }
-
 
     public Gym getGym() {
-        return gym;
+        return Gym;
     }
+
+    public Subscription getSubscription() {
+        return Subscription;
+    }
+
+    public void setSubscription(Subscription subscription) {
+        this.Subscription = subscription;
+    }
+
 }

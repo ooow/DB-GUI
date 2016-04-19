@@ -12,10 +12,17 @@ public class Subscription extends Model{
     private int Price;
     @Column
     private int Period;
-    @OneToOne(mappedBy = "subscription")
-    private Client client;
 
     public Subscription(){super();}
+
+    @Override
+    public String[] getDataToStringArr() {
+        String[] data = new String[3];
+        data[0] = String.valueOf(getId());
+        data[1] = String.valueOf(Price);
+        data[2] = String.valueOf(Period);
+        return data;
+    }
 
     public int getPrice() {
         return Price;
@@ -33,11 +40,4 @@ public class Subscription extends Model{
         Period = period;
     }
 
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
 }

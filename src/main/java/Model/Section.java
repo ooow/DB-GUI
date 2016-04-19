@@ -11,33 +11,37 @@ import java.util.Set;
 @Table
 public class Section extends Model {
     @Column
-    private String sportname;
+    private String Sportname;
     @Column
-    private int followers;
-    @ManyToMany(mappedBy = "sections")
-    private Set<Trainer> trainers = new HashSet<Trainer>();
-
-    @ManyToMany(mappedBy = "sections")
-    private Set<Client> clients = new HashSet<Client>();
+    private int Followers;
 
     public Section() {
         super();
     }
 
-    public String getSportname() {
-        return sportname;
+    @Override
+    public String[] getDataToStringArr() {
+        String[] data = new String[3];
+        data[0] = String.valueOf(getId());
+        data[1] = Sportname;
+        data[2] = String.valueOf(Followers);
+        return data;
     }
 
+    public String getSportname() {
+        return Sportname;
+    }
 
     public void setSportname(String sportname) {
-        this.sportname = sportname;
+        this.Sportname = sportname;
     }
 
     public int getFollowers() {
-        return followers;
+        return Followers;
     }
 
     public void setFollowers(int followers) {
-        this.followers = followers;
+        this.Followers = followers;
     }
+
 }

@@ -11,28 +11,43 @@ import java.util.Set;
 @Table
 public class Trainer extends Model {
     @Column
-    private String name;
+    private String Name;
     @Column
     private int Experience;
-    @ManyToMany
-    @JoinTable(name = "trainer_section",
-            joinColumns = {@JoinColumn(name = "trainer_id")},
-            inverseJoinColumns = {@JoinColumn(name = "section_id")})
-    private Set<Section> sections = new HashSet<Section>();
+    @ManyToOne
+    @JoinColumn(name = "section_id")
+    private Section Section;
     @ManyToOne
     @JoinColumn(name = "gym_id")
-    private Gym gym;
+    private Gym Gym;
 
     public Trainer() {
         super();
     }
 
+    public Trainer(String name, int experience, Gym gym) {
+        this.Name = name;
+        this.Experience = experience;
+        this.Gym = gym;
+    }
+
+    @Override
+    public String[] getDataToStringArr() {
+        String[] data = new String[5];
+        data[0] = String.valueOf(getId());
+        data[1] = Name;
+        data[2] = String.valueOf(Experience);
+        data[3] = Section.getSportname();
+        data[4] = Gym.getTitle();
+        return data;
+    }
+
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.Name = name;
     }
 
     public int getExperience() {
@@ -40,22 +55,22 @@ public class Trainer extends Model {
     }
 
     public void setExperience(int experience) {
-        Experience = experience;
+        this.Experience = experience;
     }
 
-    public Set<Section> getSections() {
-        return sections;
+    public Section getSection() {
+        return Section;
     }
 
-    public void setSections(Set<Section> sections) {
-        this.sections = sections;
+    public void setSection(Section section) {
+        this.Section = section;
     }
 
     public void setGym(Gym gym) {
-        this.gym = gym;
+        this.Gym = gym;
     }
 
     public Gym getGym() {
-        return gym;
+        return Gym;
     }
 }
