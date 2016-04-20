@@ -1,15 +1,17 @@
 package GUI;
 
+import Model.Model;
+
 /**
  * Created by Гога on 19.04.2016.
  */
 public class Association {
     private String name;
-    private Class aClass;
+    private Model model;
 
-    public Association(String name, Class aClass) {
+    public Association(String name, Model model) {
         this.name = name;
-        this.aClass = aClass;
+        this.model = model;
     }
 
     public String getName() {
@@ -20,11 +22,11 @@ public class Association {
         this.name = name;
     }
 
-    public Class getaClass() {
-        return aClass;
+    public Model getModel() {
+        return model;
     }
 
-    public void setaClass(Class aClass) {
-        this.aClass = aClass;
+    public void setModel(Model model) {
+        this.model = model;
     }
 }

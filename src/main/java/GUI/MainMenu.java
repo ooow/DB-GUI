@@ -6,10 +6,19 @@ package GUI;
 
 
 import DAO.ViewTable;
-import Model.Client;
+import Model.*;
+import hibernate.HibernateConfig;
+import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
+import java.util.List;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+import java.util.Arrays;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -25,9 +34,11 @@ public class MainMenu extends JFrame {
     private JTable table1;
     private JLabel infoLabel;
     private DefaultTableModel dt;
+    private String selectedId;
     private String[] selected;
     private String forUpdate;
     private int row, column;
+    private String[] items;
 
     public MainMenu() {
         initComponents();
@@ -35,7 +46,7 @@ public class MainMenu extends JFrame {
 
     private void initComponents() {
         Association[] tablesName = new ViewTable().getTablesName();
-        String[] items = new String[tablesName.length];
+        items = new String[tablesName.length];
         for (int i = 0; i < tablesName.length; i++) {
             items[i] = tablesName[i].getName();
         }
@@ -64,7 +75,7 @@ public class MainMenu extends JFrame {
         table1.setCellSelectionEnabled(true);
         ListSelectionModel cellSelectionModel = table1.getSelectionModel();
         cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-/*        cellSelectionModel.addListSelectionListener(valueChanged());*/
+        cellSelectionModel.addListSelectionListener(valueChanged());
 
         //---- deleteButton ---
         deleteButton = new JButton();
@@ -79,8 +90,7 @@ public class MainMenu extends JFrame {
         updateButton = new JButton();
         updateButton.setText("Update");
         updateButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
-/* updateButton.addActionListener(e -> updateButtonActionPerformed(e));*/
+        updateButton.addActionListener(e -> updateButtonActionPerformed(e));
 
         contentPane.add(updateButton);
         updateButton.setBounds(280, 400, 160, updateButton.getPreferredSize().height);
@@ -98,7 +108,7 @@ public class MainMenu extends JFrame {
         comboBox1.setSelectedIndex(0);
         contentPane.add(comboBox1);
         comboBox1.setBounds(15, 35, 135, 35);
-/*        comboBox1.addActionListener(e -> cbAction(e, items));*/
+        comboBox1.addActionListener(e -> cbAction(e));
 
         //======== scrollPane1 ========
         {
@@ -130,20 +140,20 @@ public class MainMenu extends JFrame {
         return item;
     }
 
-/*    private void deleteButtonActionPerformed(ActionEvent e) {
-        String tableName = (String) comboBox1.getSelectedItem();
-        String[] itemsName = new String[table1.getColumnCount()];
-        for (int i = 0; i < itemsName.length; i++) {
-            itemsName[i] = table1.getColumnName(i);
+    /*    private void deleteButtonActionPerformed(ActionEvent e) {
+            String tableName = (String) comboBox1.getSelectedItem();
+            String[] itemsName = new String[table1.getColumnCount()];
+            for (int i = 0; i < itemsName.length; i++) {
+                itemsName[i] = table1.getColumnName(i);
+            }
+            try {
+                Main.delete(tableName, itemsName, selected);
+                comboBox1.setSelectedItem(comboBox1.getSelectedItem());
+            } catch (SQLException e1) {
+                infoLabel.setText("Errore: Impossible remove, found dependency");
+            }
         }
-        try {
-            Main.delete(tableName, itemsName, selected);
-            comboBox1.setSelectedItem(comboBox1.getSelectedItem());
-        } catch (SQLException e1) {
-            infoLabel.setText("Errore: Impossible remove, found dependency");
-        }
-    }
-
+*/
     private void updateButtonActionPerformed(ActionEvent e) {
         String tableName = (String) comboBox1.getSelectedItem();
         String columName = table1.getColumnName(column);
@@ -152,41 +162,76 @@ public class MainMenu extends JFrame {
         for (int i = 0; i < itemsName.length; i++) {
             itemsName[i] = table1.getColumnName(i);
         }
+        SessionFactory sessionFactory = HibernateConfig.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Association[] tablesName = new ViewTable().getTablesName();
+        Model classs = null;
+        for (int i = 0; i < tablesName.length; i++) {
+            if (tableName.equals(tablesName[i].getName())) {
+                classs = tablesName[i].getModel();
+            }
+        }
+        String sql = "UPDATE " + classs.getClassName() + " SET " + columName + " = " + "'" + forUpdate + "'" +
+                " WHERE id = " + "'" + selectedId + "'";
+        System.out.println(sql);
         try {
-            Main.update(tableName, columName, forUpdate, itemsName, selected);
-        } catch (SQLException e1) {
-            e1.printStackTrace();
+            session.getTransaction();
+            SQLQuery query = session.createSQLQuery(sql);
+            query.executeUpdate();
+        } catch (Exception ee) {
+            session.getTransaction().rollback();
+            infoLabel.setText("Невозможно выполнить операцию");
+        } finally {
+            session.close();
         }
     }
 
     private void createButtonActionPerformed(ActionEvent e) {
+        SessionFactory sessionFactory = HibernateConfig.getSessionFactory();
+        Session session = sessionFactory.openSession();
         String tableName = (String) comboBox1.getSelectedItem();
+        Association[] tablesName = new ViewTable().getTablesName();
+        Model classs = null;
+        for (int i = 0; i < tablesName.length; i++) {
+            if (tableName.equals(tablesName[i].getName())) {
+                classs = tablesName[i].getModel();
+            }
+        }
+        String sql = "INSERT INTO " + classs.getClassName() + " VALUES (";
+        for (int i = 0; i < selected.length; i++) {
+            sql += "'" + selected[i] + "'";
+            if (selected.length - i > 1)
+                sql += ", ";
+            else sql += ")";
+        }
         try {
-            Main.insert(tableName, selected);
-            comboBox1.setSelectedItem(comboBox1.getSelectedItem());
-        } catch (SQLException e1) {
-            e1.printStackTrace();
+            session.getTransaction();
+            SQLQuery query = session.createSQLQuery(sql);
+            query.executeUpdate();
+        } catch (Exception ee) {
+            session.getTransaction().rollback();
+            infoLabel.setText("Невозможно выполнить операцию");
+        } finally {
+            session.close();
         }
     }
 
-    private void cbAction(ActionEvent e, String[] items) {
+    private void cbAction(ActionEvent e) {
+        JTableItem jTableItem = null;
         String item = getItem(e.getSource());
-        for (int i = 0; i < items.length; i++) {
-            if (item.equals(items[i])) {
-                try {
-                    String[] columName = Main.getColumn(items[i]);
-                    dt = new DefaultTableModel(Main.getData(items[i], columName.length), columName);
-                    dt.addRow(new String[items.length]);
-                    table1.setModel(dt);
-                    scrollPane1.setViewportView(table1);
-                    infoLabel.setText("");
-                } catch (SQLException e1) {
-                    e1.printStackTrace();
-                }
-                break;
+        Association[] tablesName = new ViewTable().getTablesName();
+        for (int i = 0; i < tablesName.length; i++) {
+            if (item.equals(tablesName[i].getName())) {
+                jTableItem = new ViewTable().getTable(tablesName[i].getModel());
             }
         }
+        dt = new DefaultTableModel(jTableItem.getItems(), jTableItem.getColumNames());
+        dt.addRow(new String[items.length]);
+        table1.setModel(dt);
+        scrollPane1.setViewportView(table1);
+        infoLabel.setText("");
     }
+
 
     public ListSelectionListener valueChanged() {
         return new ListSelectionListener() {
@@ -196,17 +241,19 @@ public class MainMenu extends JFrame {
                     row = table1.getSelectedRow();
                     column = table1.getSelectedColumn();
                     forUpdate = (String) table1.getValueAt(row, column);
+                    selectedId = (String) table1.getValueAt(row, 0);
+                    infoLabel.setText("");
                     int count = table1.getColumnCount();
                     selected = new String[count];
                     for (int i = 0; i < count; i++) {
                         selected[i] = (String) table1.getValueAt(row, i);
                     }
-                    infoLabel.setText("");
                 } catch (ArrayIndexOutOfBoundsException e1) {
-                    selected = null;
+                    selectedId = null;
+                    infoLabel.setText("Выделите поле");
                 }
-                System.out.println("Selected: " + selected + ":" + row + " - " + column);
+                System.out.println("Selected: " + row + " - " + column);
             }
         };
-    }*/
+    }
 }

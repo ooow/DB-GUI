@@ -20,10 +20,11 @@ public class ViewTable {
         Session session = sessionFactory.openSession();
         try {
             Field[] fields = classs.getClass().getDeclaredFields();
-            String[] colums = new String[fields.length];
+            String[] colums = new String[fields.length + 1];
+            colums[0] = "id";
             for (int i = 0; i < fields.length; i++) {
                 String field = fields[i].toString();
-                colums[i] = field.substring(field.lastIndexOf(".") + 1);
+                colums[i + 1] = field.substring(field.lastIndexOf(".") + 1);
             }
             Criteria criteria = session.createCriteria(classs.getClass());
             List<Model> models = criteria.list();
@@ -43,11 +44,11 @@ public class ViewTable {
     }
 
     public Association[] getTablesName() {
-        Association[] associations = {new Association("Клиенты", Client.class),
-                new Association("Тренера", Trainer.class),
-                new Association("Секции", Section.class),
-                new Association("Абонименты", Subscription.class),
-                new Association("Спортзалы", Gym.class)};
+        Association[] associations = {new Association("Клиенты", new Client()),
+                new Association("Тренера", new Trainer()),
+                new Association("Секции", new Section()),
+                new Association("Абонементы", new Subscription()),
+                new Association("Спортзалы", new Gym())};
         return associations;
     }
 }

@@ -48,12 +48,12 @@ public class Client extends Model {
         String[] data = new String[8];
         data[0] = String.valueOf(getId());
         data[1] = Name;
-        data[2] = String.valueOf(Age);
-        data[3] = Sex;
-        data[4] = Section.getSportname();
-        data[5] = Trainer.getName();
-        data[6] = String.valueOf(Subscription.getId());
-        data[7] = Gym.getTitle();
+        data[2] = Sex;
+        data[3] = String.valueOf(Age);
+        data[4] = Trainer.getName();
+        data[5] = Section.getSportname();
+        data[6] = Gym.getTitle();
+        data[7] = String.valueOf(Subscription.getId());
         return data;
     }
 
