@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GT.iml" filepath="$PROJECT_DIR$/GT.iml" />
+      <module fileurl="file://$PROJECT_DIR$/connect_sql_server.iml" filepath="$PROJECT_DIR$/connect_sql_server.iml" />
     </modules>
   </component>
 </project>

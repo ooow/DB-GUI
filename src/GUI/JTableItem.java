@@ -1,15 +1,15 @@
 package GUI;
 
 /**
- * Created by Гога on 18.04.2016.
+ * Created by Гога on 21.04.2016.
  */
 public class JTableItem {
     private String[] columNames;
-    private String[][] items;
+    private String[][] data;
 
-    public JTableItem(String[] columNames, String[][] items) {
+    public JTableItem(String[] columNames, String[][] data) {
         this.columNames = columNames;
-        this.items = items;
+        this.data = data;
     }
 
     public String[] getColumNames() {
@@ -20,11 +20,11 @@ public class JTableItem {
         this.columNames = columNames;
     }
 
-    public String[][] getItems() {
-        return items;
+    public String[][] getData() {
+        return data;
     }
 
-    public void setItems(String[][] items) {
-        this.items = items;
+    public void setData(String[][] data) {
+        this.data = data;
     }
 }
