@@ -2,6 +2,7 @@ package GUI;
 
 import DAO.DML;
 import DAO.Mapping;
+import DAO.SQLRequestProcessing;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -19,10 +20,15 @@ public class MainMenu extends JFrame {
     private JButton deleteButton;
     private JButton updateButton;
     private JButton createButton;
+    private JButton requestButton1;
+    private JButton requestButton2;
+    private JButton requestButton3;
     private JComboBox comboBox1;
     private JScrollPane scrollPane1;
     private JTable table1;
+    private JLabel backgroundLabel;
     private JLabel infoLabel;
+    private JLabel requestLabel;
     private DefaultTableModel dt;
     private Association[] associations;
     private String[] items;
@@ -42,21 +48,31 @@ public class MainMenu extends JFrame {
         }
         comboBox1 = new JComboBox(items);
         scrollPane1 = new JScrollPane();
+        backgroundLabel = new JLabel();
         infoLabel = new JLabel();
+        requestLabel = new JLabel();
         String firstItem = associations[0].getTableName();
         refresh(firstItem);
 
         //======== this ========
         setMinimumSize(new Dimension(800, 500));
+/*        setResizable(false);*/
         setVisible(true);
         setTitle("\u0421\u0423\u0411\u0414 GT");
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
         //---- label1 ----
-        infoLabel.setText("");
+        infoLabel.setFont(new Font("Calibri", table1.getFont().getStyle(), table1.getFont().getSize() + 1));
+        infoLabel.setForeground(Color.white);
         contentPane.add(infoLabel);
-        infoLabel.setBounds(205, 295, 450, 25);
+        infoLabel.setBounds(150, 430, 600, 25);
+
+        //---- label2 ----
+        requestLabel.setFont(new Font("Calibri", table1.getFont().getStyle(), table1.getFont().getSize() + 1));
+        requestLabel.setForeground(Color.white);
+        contentPane.add(requestLabel);
+        requestLabel.setBounds(50, 350, 700, 25);
 
         //---- deleteButton ---
         deleteButton = new JButton();
@@ -64,7 +80,7 @@ public class MainMenu extends JFrame {
         deleteButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         deleteButton.addActionListener(e -> deleteButtonActionPerformed());
         contentPane.add(deleteButton);
-        deleteButton.setBounds(55, 400, 160, deleteButton.getPreferredSize().height);
+        deleteButton.setBounds(55, 400, 160, 25);
 
         //---- updateButton ---
         updateButton = new JButton();
@@ -72,7 +88,7 @@ public class MainMenu extends JFrame {
         updateButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         updateButton.addActionListener(e -> updateButtonActionPerformed());
         contentPane.add(updateButton);
-        updateButton.setBounds(280, 400, 160, updateButton.getPreferredSize().height);
+        updateButton.setBounds(280, 400, 160, 25);
 
         //---- createButton ---
         createButton = new JButton();
@@ -80,7 +96,32 @@ public class MainMenu extends JFrame {
         createButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         createButton.addActionListener(e -> createButtonActionPerformed());
         contentPane.add(createButton);
-        createButton.setBounds(510, 400, 160, createButton.getPreferredSize().height);
+        createButton.setBounds(510, 400, 160, 25);
+
+        //---- requestButton1 ---
+        requestButton1 = new JButton();
+        requestButton1.setText("Подсчет статистики");
+        requestButton1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        requestButton1.addActionListener(e -> requestButton1ActionPerformed());
+
+        contentPane.add(requestButton1);
+        requestButton1.setBounds(15, 220, 160, 25);
+
+        //---- requestButton2 ---
+        requestButton2 = new JButton();
+        requestButton2.setText("Бухгалтерский отчет");
+        requestButton2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        requestButton2.addActionListener(e -> requestButton2ActionPerformed());
+        contentPane.add(requestButton2);
+        requestButton2.setBounds(15, 250, 160, 25);
+
+        //---- requestButton3 ---
+        requestButton3 = new JButton();
+        requestButton3.setText("Типы абонементов");
+        requestButton3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        requestButton3.addActionListener(e -> requestButton3ActionPerformed());
+        contentPane.add(requestButton3);
+        requestButton3.setBounds(15, 280, 160, 25);
 
         //---- comboBox1 ----
         comboBox1.setSelectedIndex(0);
@@ -90,7 +131,7 @@ public class MainMenu extends JFrame {
 
         //======== scrollPane1 ========
         contentPane.add(scrollPane1);
-        scrollPane1.setBounds(205, 15, 500, 300);
+        scrollPane1.setBounds(205, 15, 550, 300);
 
         { // compute preferred size
             Dimension preferredSize = new Dimension();
@@ -107,6 +148,11 @@ public class MainMenu extends JFrame {
         }
         pack();
         setLocationRelativeTo(null);
+
+        //---- backgroundLabel ----
+        backgroundLabel.setIcon(new ImageIcon("C:\\Users\\\u0413\u043e\u0433\u0430\\IdeaProjects\\DB-GUI\\backgound.jpg"));
+        contentPane.add(backgroundLabel);
+        backgroundLabel.setBounds(0, 0, 800, 500);
     }
 
     public String getItem(Object e) {
@@ -129,6 +175,10 @@ public class MainMenu extends JFrame {
             table1 = new JTable();
             table1.setModel(dt);
             table1.setCellSelectionEnabled(true);
+            table1.setBackground(new Color(102, 102, 102));
+            table1.setFillsViewportHeight(true);
+            table1.setFont(new Font("Calibri", table1.getFont().getStyle(), table1.getFont().getSize() + 1));
+            table1.setForeground(Color.white);
             ListSelectionModel cellSelectionModel = table1.getSelectionModel();
             cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             cellSelectionModel.addListSelectionListener(valueChanged());
@@ -140,6 +190,7 @@ public class MainMenu extends JFrame {
     }
 
     private void deleteButtonActionPerformed() {
+        boolean flag = true;
         String tableName = new Association().getTableNameByRusName((String) comboBox1.getSelectedItem());
         String[] itemsName = new String[table1.getColumnCount()];
         for (int i = 0; i < itemsName.length; i++) {
@@ -148,12 +199,20 @@ public class MainMenu extends JFrame {
         try {
             DML.delete(tableName, itemsName, selected);
             comboBox1.setSelectedItem(comboBox1.getSelectedItem());
-        } catch (SQLException e1) {
-            infoLabel.setText("Errore: Impossible remove, found dependency");
+        } catch (SQLException e) {
+            flag = false;
+            infoLabel.setText(e.getMessage());
+        } catch (NullPointerException e) {
+            flag = false;
+            infoLabel.setText("Выделите поле");
+        } finally {
+            if (flag)
+                infoLabel.setText("Запись успешно удалена");
         }
     }
 
     private void updateButtonActionPerformed() {
+        boolean flag = true;
         String tableName = new Association().getTableNameByRusName((String) comboBox1.getSelectedItem());
         String columName = table1.getColumnName(column);
         String[] itemsName = new String[table1.getColumnCount()];
@@ -162,20 +221,62 @@ public class MainMenu extends JFrame {
             itemsName[i] = table1.getColumnName(i);
         }
         try {
-            DML.update(tableName, columName, forUpdate, itemsName, selected);
-        } catch (SQLException e1) {
-            e1.printStackTrace();
+            if (tableName.equals("ClientsView")) {
+                DML.delete(tableName, itemsName, selected);
+                DML.insert(tableName, selected);
+            } else {
+                DML.update(tableName, columName, forUpdate, itemsName, selected);
+            }
+            comboBox1.setSelectedItem(comboBox1.getSelectedItem());
+        } catch (SQLException e) {
+            flag = false;
+            infoLabel.setText(e.getMessage());
+        } catch (NullPointerException e) {
+            flag = false;
+            infoLabel.setText("Выделите поле");
+        } finally {
+            if (flag)
+                infoLabel.setText("Запись успешно изменена");
         }
     }
 
     private void createButtonActionPerformed() {
+        boolean flag = true;
         String tableName = new Association().getTableNameByRusName((String) comboBox1.getSelectedItem());
         try {
             DML.insert(tableName, selected);
             comboBox1.setSelectedItem(comboBox1.getSelectedItem());
-        } catch (SQLException e1) {
-            e1.printStackTrace();
+        } catch (SQLException e) {
+            flag = false;
+            infoLabel.setText(e.getMessage());
+        } catch (NullPointerException e) {
+            flag = false;
+            infoLabel.setText("Выделите поле");
+        } finally {
+            if (flag)
+                infoLabel.setText("Запись успешно добавлена");
         }
+    }
+
+    private void requestButton1ActionPerformed() {
+        String[] statistic = new SQLRequestProcessing().getStatistic();
+        String out = "Клиентов:   " + statistic[0] + "            Женщин:   " + statistic[1] +
+                "            Мужчин:   " + statistic[2];
+        requestLabel.setText(out);
+    }
+
+    private void requestButton2ActionPerformed() {
+        String[] statistic = new SQLRequestProcessing().getReport();
+        String out = "Абонементов продано:   " + statistic[0] + "            Общая сумма:   " + statistic[1] +
+                "            Безлимитных:   " + statistic[2] + "            Ограниченных:   " + statistic[3];
+        requestLabel.setText(out);
+    }
+
+    private void requestButton3ActionPerformed() {
+        String[] statistic = new SQLRequestProcessing().getSpace();
+        String out = "Абонементов на 360:   " + statistic[0] + "            Абонементов на 180:   " + statistic[1] +
+                "            Абонементов на 30:   " + statistic[2];
+        requestLabel.setText(out);
     }
 
     public ListSelectionListener valueChanged() {

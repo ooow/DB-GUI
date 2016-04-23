@@ -23,13 +23,8 @@ public class DML {
     }
 
     public static void delete(String tableName, String[] items, String[] colums) throws SQLException {
-        String sql = "DELETE FROM " + tableName + " WHERE ";
-        for (int i = 0; i < colums.length; i++) {
-            sql += items[i] + " = " + "'" + colums[i] + "'";
-            if (colums.length - i > 1)
-                sql += " and ";
-
-        }
+        String sql = "DELETE FROM " + tableName + " WHERE " +
+                items[0] + " = " + "'" + colums[0] + "'" ;
         System.out.println(sql);
         getStatement().executeUpdate(sql);
     }
@@ -41,7 +36,6 @@ public class DML {
             if (colums.length - i > 1)
                 sql += ", ";
             else sql += ")";
-
         }
         System.out.println(sql);
         getStatement().executeUpdate(sql);

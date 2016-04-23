@@ -16,17 +16,16 @@ public class Association {
     }
 
     public Association[] getItems() {
-        Association[] associations = {new Association("Clients", "Клиенты"),
+        Association[] associations = {new Association("ClientsView", "Клиенты"),
                 new Association("Trainers", "Тренера"),
                 new Association("Sections", "Секции"),
                 new Association("GYM", "Спортзалы"),
                 new Association("SportsEquipment", "Спортивные оборудования"),
                 new Association("Hall", "Залы"),
-                new Association("Timetable", "Рассписание"),
+                new Association("TimetableView", "Расписание"),
                 new Association("PriceList", "Прйс лист"),
-                new Association("Subscription", "Абонементы"),
-                new Association("Cloakroom", "Раздевалка"),
-                new Association("Connects", "Связь Клиент-Секция")
+                new Association("SubscriptionView", "Абонементы"),
+                new Association("ConnectsView", "Связь Клиент-Секция")
         };
         return associations;
     }
